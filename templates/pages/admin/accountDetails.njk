@@ -1,0 +1,166 @@
+{% extends "layouts/admin.njk" %}
+
+{% block content %}
+    <div class="row">
+
+        {# Account Info #}
+        <div class="col-md-6">
+            <div class="account-info" id="account-info">
+                <ul class="list-group list-group-flush">
+
+                    {# Title #}
+                    <li class="list-group-item -title">
+                        <div class="account-title text-info">
+                            <h2 class="account-title_text">Account</h2>
+                            <p class="account-state" id="account-state" data-state="{{ selectedUser.accountState }}">
+                                <span class="account-state_active text-success">active</span>
+                                <span class="account-state_deactivated text-danger">deactivated</span>
+                            </p>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item account-field" data-key="_id" data-value="{{ selectedUser._id }}">
+                        <p class="account-field_text">
+                            <span class="account-field_label">_id:</span>
+                            {{ selectedUser._id }}</p>
+                    </li>
+                    <li class="list-group-item account-field" data-key="email" data-value="{{ selectedUser.email }}">
+                        <p class="account-field_text">
+                            <span class="account-field_label">Email:</span>
+                            {{ selectedUser.email }}</p>
+                    </li>
+                    <li class="list-group-item account-field" data-key="role" data-value="{{ selectedUser.role }}">
+                        <p class="account-field_text">
+                            <span class="account-field_label">Role:</span>
+                            <span class="account-field_value">{{ selectedUser.roleCapitalized }}</span>
+                        </p>
+                    </li>
+                    <li class="list-group-item account-field" data-key="createdAt" data-value="{{ selectedUser.createdAt }}">
+                        <p class="account-field_text">
+                            <span class="account-field_label">Created:</span>
+                            {{ selectedUser.createdAt }}</p>
+                    </li>
+                    <li class="list-group-item account-field" data-key="messagesCount" data-value="{{ selectedUser.messagesCount }}">
+                        <p class="account-field_text">
+                            <span class="account-field_label">Messages:</span>
+                            <span class="badge badge-info">{{ selectedUser.messagesCount }}</span>
+                        </p>
+                    </li>
+                    <li class="list-group-item account-field -controls">
+
+                        {# Account activation #}
+                        {% if user.role == 'superadmin' or user.permissions.accountsActivation %}
+                            <button class="account-field_control btn btn-outline-primary" id="account-activation" data-state="{{ selectedUser.accountState }}">
+                                {% if selectedUser.accountState == 'active' %}
+                                    Deactivate
+                                {% else %}
+                                    Activate
+                                {% endif %}
+                            </button>
+                        {% endif %}
+
+                        {# Role change #}
+                        {% if user.role == 'superadmin' or (user.role == 'admin' and user.permissions.roleChange) %}
+                            <div class="account-field_control btn-group dropright" id="role-control">
+                                <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Role
+                                </button>
+                                <div class="dropdown-menu">
+                                    <button class="role-item dropdown-item{% if selectedUser.role == 'user' %} active{% endif %}" data-value="user">User</button>
+
+                                    {% if user.role == 'admin' or user.role == 'superadmin' %}
+                                        <button class="role-item dropdown-item{% if selectedUser.role == 'admin' %} active{% endif %}" data-value="admin">Admin</button>
+                                    {% endif %}
+
+                                    {% if user.role == 'superadmin' %}
+                                        <button class="role-item dropdown-item{% if selectedUser.role == 'superadmin' %} active{% endif %}" data-value="superadmin">Superadmin</button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {# Permissions change #}
+                        {% set permissionsChangeClass = '' %}
+                        {% if user.role != 'superadmin' %}
+                            {% set permissionsChangeClass = ' -hidden' %}
+                        {% endif %}
+                        <div class="account-field_control btn-group dropright{{ permissionsChangeClass }}" id="permissions-control">
+                            <button type="button" class="btn btn-outline-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Permissions
+                            </button>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-item permissions-item" data-type="roleChange" data-allowed="{{ selectedUser.permissions.roleChange }}">
+                                    <button class="dropdown-item permissions-item_control" type="button" data-type="allow">
+                                        <span class="permissions-item_action text-success">Allow</span>
+                                        <span class="permissions-item_type">| Role Change</span>
+                                    </button>
+                                    <button class="dropdown-item permissions-item_control" type="button" data-type="disallow">
+                                        <span class="permissions-item_action text-danger">Disallow</span>
+                                        <span class="permissions-item_type">| Role Change</span>
+                                    </button>
+                                </div>
+
+                                <div class="dropdown-item permissions-item" data-type="accountsActivation" data-allowed="{{ selectedUser.permissions.accountsActivation }}">
+                                    <button class="dropdown-item permissions-item_control" type="button" data-type="allow">
+                                        <span class="permissions-item_action text-success">Allow</span>
+                                        <span class="permissions-item_type">| Accounts Activation</span>
+                                    </button>
+                                    <button class="dropdown-item permissions-item_control" type="button" data-type="disallow">
+                                        <span class="permissions-item_action text-danger">Disallow</span>
+                                        <span class="permissions-item_type">| Accounts Activation</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# Save edits #}
+                        <button class="account-field_control btn btn-primary -hidden" id="account-save">Save</button>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    {# User Messages #}
+    {% if selectedUserMessages | length %}
+        <div class="row">
+            <div class="col-md-10">
+
+                <div class="account-messages" id="account-messages">
+                    <ul class="list-group list-group-flush">
+
+                        {# Title #}
+                        <li class="list-group-item -title">
+                            <h2 class="account-title text-info">User Messages</h2>
+                            <button class="btn btn-link" data-type="deleteAll" data-user-id="{{ selectedUser._id }}">Delete All</button>
+                        </li>
+
+                        {% for message in selectedUserMessages %}
+                            <li class="list-group-item">
+                                <div class="message-field" data-id="{{ message._id }}">
+                                    <p class="message-field_date">{{ message.createdAt }}</p>
+
+                                    <div class="message-field_group">
+                                        <p class="message-field_text">{{ message.text }}</p>
+                                        <textarea class="message-field_edit">{{ message.text }}</textarea>
+                                    </div>
+
+                                    <div class="btn-group message-field_actions">
+                                        <button class="btn btn-link" data-type="edit">Edit</button>
+                                        <button class="btn btn-link" data-type="save">Save</button>
+                                        <button class="btn btn-link" data-type="delete">Delete</button>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

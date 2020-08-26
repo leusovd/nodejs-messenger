@@ -1,0 +1,7 @@
+<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/reset.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+
+{% if active|default(null) and active == 'panel' %}
+    <link rel="stylesheet" href="/assets/css/panel.css">
+{% endif %}

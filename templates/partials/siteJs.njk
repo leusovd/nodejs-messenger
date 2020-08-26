@@ -1,0 +1,13 @@
+<script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+{% if user.email %}
+    <script type="text/javascript" src="/assets/js/lib.js"></script>
+    <script type="text/javascript" src="/assets/js/app.js"></script>
+{% else %}
+    <script type="text/javascript" src="/assets/js/auth.js"></script>
+{% endif %}
+
+{% if active == 'panel' %}
+    <script type="text/javascript" src="/assets/js/panel.js"></script>
+{% endif %}

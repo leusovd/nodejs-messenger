@@ -1,0 +1,26 @@
+{% extends "layouts/main.njk" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form class="form" id="login-form">
+                    <div class="form-group">
+                        <label for="signin-email">Email address</label>
+                        <input type="email" class="form-control" id="signup-email" aria-describedby="emailHelp" name="email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="signin-password">Password</label>
+                        <input type="password" class="form-control" id="signup-password" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="login-submit">Submit</button>
+                    <small class="form-text text-muted">
+                        If you are a new here, visit our
+                        <a href="/register">registration page</a>
+                    </small>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

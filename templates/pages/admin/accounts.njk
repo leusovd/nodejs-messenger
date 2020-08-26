@@ -1,0 +1,55 @@
+{% extends "layouts/admin.njk" %}
+
+{% block content %}
+    <div class="accounts">
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <ul class="account-list" id="account-list">
+                        {% if userList | length %}
+                            {% for user in userList %}
+                                <li class="account-list_item">
+                                    <div class="card account-item">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">
+                                                {% if user.accountState == 'active' %}
+                                                    <span class="text-info text-success">{{ user.accountStateCapitalized }}</span>
+                                                {% else %}
+                                                    <span class="text-info text-danger">{{ user.accountStateCapitalized }}</span>
+                                                {% endif %}
+                                                
+                                            </li>
+                                            <li class="list-group-item">
+                                                <span class="text-info">_id:</span>
+                                                {{ user._id }}</li>
+                                            <li class="list-group-item">
+                                                <span class="text-info">Email:</span>
+                                                {{ user.email }}</li>
+                                            <li class="list-group-item">
+                                                <span class="text-info">Role:</span>
+                                                {{ user.roleCapitalized }}</li>
+                                            <li class="list-group-item">
+                                                <span class="text-info">Created:</span>
+                                                {{ user.createdAt }}</li>
+                                            <li class="list-group-item">
+                                                <span class="text-info">Messages:</span>
+                                                <span class="badge badge-info">{{ user.messagesCount }}</span>
+                                            </li>
+                                        </ul>
+                                        <div class="card-body">
+                                            <a href="/admin/accounts/{{ user._id }}" class="card-link">Details</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

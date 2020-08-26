@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ title }}</title>
+
+        {# Site Css #}
+        {% include 'partials/siteCss.njk' %}
+        {% block pageCss %}{% endblock %}
+    </head>
+
+    <body class="body{{ ' -' ~ active }}">
+
+        {# Header #}
+        {% include 'partials/header.njk' %}
+
+        <div class="site-content">
+            {% block content %}{% endblock %}
+        </div>
+
+        {# Site Js #}
+        {% include 'partials/siteJs.njk' %}
+        {% block pageJs %}{%endblock%}
+
+        </body>
+    </html>

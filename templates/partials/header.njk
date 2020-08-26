@@ -1,0 +1,60 @@
+<header class="site-header">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-6 align-self-center">
+                <a href="/" class="logo">mSgr</a>
+            </div>
+            <div class="col-6">
+                <ul class="nav justify-content-end align-items-center">
+
+                    {% if user.email %}
+                        <li class="nav-item">
+                            <div class="dropdown">
+                                <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {% if user.person.fullname %}
+                                        {{ user.person.fullname }}
+                                    {% else %}
+                                        User
+                                    {% endif %}
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                    {% if active == 'panel' %}
+                                        <a href="/admin" class="dropdown-item{% if pageName == 'adminDashboard' %} active{% endif %}">Dashboard</a>
+                                        <a href="/admin/profile" class="dropdown-item{% if pageName == 'adminProfile' %} active{% endif %}">User Profile</a>
+                                        {% if user.role != 'user' %}
+                                            <a href="/admin/accounts" class="dropdown-item{% if pageName == 'adminAccounts' %} active{% endif %}">Accounts</a>
+                                        {% endif %}
+                                        <a href="/admin/settings" class="dropdown-item{% if pageName == 'adminSettings' %} active{% endif %}">Settings</a>
+                                    {% else %}
+                                        <a href="/admin" class="dropdown-item">Panel</a>
+                                    {% endif %}
+
+                                    <button class="dropdown-item text-danger" id="auth-logout">Logout</button>
+                                </div>
+                            </div>
+                        </li>
+                    {% else %}
+                        {% if active == 'login' %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Register</a>
+                            </li>
+                        {% elseif active == 'register' %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Login</a>
+                            </li>
+                        {% elseif active == 'home' %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/register">Register</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</header>

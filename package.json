@@ -1,0 +1,27 @@
+{
+  "name": "5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.5.0",
+    "celebrate": "^12.1.1",
+    "connect-mongo": "^3.2.0",
+    "dateformat": "^3.0.3",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "jquery": "^3.5.1",
+    "mongoose": "^5.9.15",
+    "nunjucks": "^3.2.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  }
+}

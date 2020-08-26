@@ -1,0 +1,239 @@
+.body.-panel {
+    height: 100%;
+}
+
+.body.-panel .site-content {
+    min-height: unset;
+    padding: 0;
+}
+
+.panel {
+    display: flex;
+    height: calc(100vh - 45px);
+    padding: 20px 0 0;
+}
+
+.panel .list-group {
+    height: 100%;
+    border-radius: unset;
+}
+
+.panel .list-group-item {
+    border-right: unset;
+    border-left: unset;
+}
+
+.panel .list-group-item:first-child {
+    border-top: unset;
+}
+
+.panel_sidebar {
+    padding: 20px 0 0;
+}
+
+.panel_content {
+    padding: 30px;
+}
+
+/* Toolbar */
+.toolbar {
+    padding: 30px 0;
+}
+
+.toolbar-list {
+    display: flex;
+    margin: 0 0 0 -30px;
+}
+
+.toolbar-list_item {
+    margin: 0 0 0 30px;
+}
+
+.toolbar-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background: rgba(0, 123, 255, .1);
+    border-radius: 8px;
+    transition: background 75ms linear;
+}
+
+.toolbar-link:hover {
+    background: rgba(0, 123, 255, .2);
+    text-decoration: none;
+}
+
+.toolbar-link_icon {
+    width: 70px;
+    height: 70px;
+}
+
+.toolbar-link_name {
+    margin: 5px 0 0;
+    color: #000;
+}
+
+/* Accounts */
+.accounts {
+    padding: 30px 0;
+}
+
+.account-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -30px 0 0 -30px;
+}
+
+.account-list_item {
+    margin: 30px 0 0 30px;
+}
+
+.account-item {
+    width: 300px;
+}
+
+/* Account Page */
+.account-info {
+    max-width: 350px;
+}
+
+.account-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding: 0 1.25rem;
+}
+.account-field.-controls {
+    justify-content: flex-start;
+    padding: 30px 0 0;
+    margin: 0 -10px 0 0;
+
+}
+.account-field_control {
+    margin: 0 10px 0 0;
+}
+
+.-hidden {
+    display: none;
+}
+
+.account-messages {
+    margin: 30px 0 0;
+}
+
+.account-messages .list-group-item.-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.account-title {
+    position: relative;
+    font-size: 20px;
+}
+
+.account-state {
+    position: absolute;
+    bottom: 100%;
+    left: 100%;
+    font-size: 14px;
+}
+.account-state[data-state="deactivated"] .account-state_active,
+.account-state[data-state="active"] .account-state_deactivated
+{
+    display: none;
+}
+
+#account-activation[data-state="active"] {
+    color: #dc3545 !important;
+    border-color: #dc3545 !important;
+}
+#account-activation[data-state="deactivated"] {
+    color: #28a745 !important;
+    border-color: #28a745 !important;
+}
+#account-activation[data-state="active"]:hover,
+#account-activation[data-state="active"]:active,
+#account-activation[data-state="active"]:visited
+{
+    color: #fff !important;
+    background-color: #dc3545 !important;
+}
+#account-activation[data-state="deactivated"]:hover,
+#account-activation[data-state="deactivated"]:active,
+#account-activation[data-state="deactivated"]:visited
+{
+    color: #fff !important;
+    background-color: #28a745 !important;
+}
+#account-activation[data-state="active"]:focus {
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, .5) !important;
+}
+#account-activation[data-state="deactivated"]:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, .5) !important;
+}
+
+.message-field {
+    display: flex;
+    align-items: flex-start;
+}
+
+.account-field_label {
+    color: rgba(75, 27, 27, 0.35);
+}
+
+.message-field_date {
+    flex-shrink: 0;
+    padding: 6px 0 0;
+    margin: 0 20px 0 0;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, .35);
+}
+
+.message-field_group {
+    flex-grow: 1;
+    padding: 6px 0 0;
+    margin: 0 20px 0 0;
+}
+
+.message-field_text {
+    line-height: 1.5;
+}
+
+.message-field_edit {
+    display: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    resize: none;
+}
+
+.message-field.-edit .message-field_edit {
+    display: block;
+}
+
+.message-field_actions [data-type="save"] {
+    display: none;
+}
+
+.message-field.-edit .message-field_text, 
+.message-field.-edit [data-type="edit"], 
+.message-field.-edit [data-type="delete"] {
+    display: none;
+}
+
+.message-field.-edit [data-type="save"] {
+    display: inline-block;
+}
+
+.list-group-item.-title {
+    display: flex;
+}
+
+.permissions-item[data-allowed="true"] .permissions-item_control[data-type="allow"],
+.permissions-item[data-allowed="false"] .permissions-item_control[data-type="disallow"]
+{
+    display: none;
+}
